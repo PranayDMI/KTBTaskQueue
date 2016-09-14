@@ -36,6 +36,12 @@ extern const NSInteger KTBTaskAlwaysRetry;
  */
 @property (readonly, nonatomic, strong) NSDictionary *userInfo;
 /**
+ The task's URL.
+ 
+ Task request URL used to make the network request.
+ */
+@property (readonly, nonatomic, copy) NSString *taskRequestURL;
+/**
  Date this task was created.
  */
 @property (readonly, nonatomic, strong) NSDate *createdDate;

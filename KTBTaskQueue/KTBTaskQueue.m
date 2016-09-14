@@ -311,6 +311,7 @@ const NSTimeInterval KTBTaskQueueDefaultPollingInterval = 10;
          @"CREATE TABLE IF NOT EXISTS tasks ("
          @"    id               INTEGER PRIMARY KEY AUTOINCREMENT,"
          @"    name             TEXT NOT NULL DEFAULT '',"
+         @"    taskRequestURL   TEXT NOT NULL DEFAULT '',"
          @"    userInfo         TEXT NOT NULL DEFAULT '{}',"
          @"    createdDate      INTEGER NOT NULL,"
          @"    availableDate    INTEGER NOT NULL,"
@@ -326,9 +327,9 @@ const NSTimeInterval KTBTaskQueueDefaultPollingInterval = 10;
 - (void)insertTask:(KTBTask *)task {
     [self.databaseQueue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:
-         @"INSERT INTO tasks (name, userInfo, createdDate, availableDate, maxRetries, retryWithBackoff)"
+         @"INSERT INTO tasks (name, taskRequestURL, userInfo, createdDate, availableDate, maxRetries, retryWithBackoff)"
          @"VALUES (?, ?, ?, ?, ?, ?)",
-         task.name, [task userInfoString], [task createdDateNumber], [task availableDateNumber], @(task.maxRetries), @(!self.prohibitsBackoff && task.retryWithBackoff)];
+         task.name, task.taskRequestURL, [task userInfoString], [task createdDateNumber], [task availableDateNumber], @(task.maxRetries), @(!self.prohibitsBackoff && task.retryWithBackoff)];
         [self checkErrorForDatabase:db stepDescription:@"inserting task into task queue"];
     }];
 }

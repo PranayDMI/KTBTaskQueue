@@ -17,6 +17,7 @@ static BOOL KTBTaskRetryWithBackoffDefault = YES;
 @property (readwrite, nonatomic, strong) NSNumber *taskID;
 @property (readwrite, nonatomic, copy) NSString *name;
 @property (readwrite, nonatomic, strong) NSDictionary *userInfo;
+@property (readwrite, nonatomic, copy) NSString *taskRequestURL;
 @property (readwrite, nonatomic, strong) NSDate *createdDate;
 @property (readwrite, nonatomic, strong) NSDate *availableDate;
 @property (readwrite, nonatomic, assign) NSInteger retryCount;
@@ -37,6 +38,7 @@ static BOOL KTBTaskRetryWithBackoffDefault = YES;
     task.availableDate = availableDate ?: [NSDate date];
     task.maxRetries = maxRetries;
     task.retryWithBackoff = useBackoff;
+    task.taskRequestURL = requestURL;
     return task;
 }
 
@@ -46,6 +48,7 @@ static BOOL KTBTaskRetryWithBackoffDefault = YES;
     KTBTask *task = [KTBTask new];
     task.taskID = resultDictionary[@"id"];
     task.name = resultDictionary[@"name"];
+    task.taskRequestURL = resultDictionary[@"taskRequestURL"];
     task.userInfo = [NSJSONSerialization JSONObjectWithData:[resultDictionary[@"userInfo"] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL] ?: @{};
     task.createdDate = [NSDate dateWithTimeIntervalSince1970:[resultDictionary[@"createdDate"] integerValue]];
     task.availableDate = [NSDate dateWithTimeIntervalSince1970:[resultDictionary[@"availableDate"] integerValue]];
