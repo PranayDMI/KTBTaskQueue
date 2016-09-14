@@ -154,8 +154,8 @@ const NSTimeInterval KTBTaskQueueDefaultPollingInterval = 10;
 
 #pragma mark - Adding Tasks
 
-- (void)enqueueTaskWithName:(NSString *)name userInfo:(NSDictionary *)userInfo {
-    [self enqueueTask:[KTBTask taskWithName:name userInfo:userInfo]];
+- (void)enqueueTaskWithName:(NSString *)name taskURL:(NSString *)requestURL userInfo:(NSDictionary *)userInfo {
+  [self enqueueTask:[KTBTask taskWithName:name taskURL:requestURL userInfo:userInfo]];
 }
 
 - (void)enqueueTask:(KTBTask *)task {

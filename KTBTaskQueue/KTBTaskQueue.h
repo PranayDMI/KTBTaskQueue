@@ -91,7 +91,7 @@ typedef void(^KTBTaskQueueExecutionBlock)(KTBTask *task, KTBTaskCompletionBlock 
  @param name The name of the task to enqueue.
  @param userInfo An optional dictionary of data to store in the task. Must be JSON-serializable.
  */
-- (void)enqueueTaskWithName:(NSString *)name userInfo:(NSDictionary *)userInfo;
+- (void)enqueueTaskWithName:(NSString *)name taskURL:(NSString *)requestURL userInfo:(NSDictionary *)userInfo;
 /**
  Enqueue a task. See @c KTBTask.h for how to create tasks. Task will (almost)
  immediately be attempted via delegate or execution block.
