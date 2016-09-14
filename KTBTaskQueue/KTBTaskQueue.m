@@ -328,7 +328,7 @@ const NSTimeInterval KTBTaskQueueDefaultPollingInterval = 10;
     [self.databaseQueue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:
          @"INSERT INTO tasks (name, taskRequestURL, userInfo, createdDate, availableDate, maxRetries, retryWithBackoff)"
-         @"VALUES (?, ?, ?, ?, ?, ?)",
+         @"VALUES (?, ?, ?, ?, ?, ?, ?)",
          task.name, task.taskRequestURL, [task userInfoString], [task createdDateNumber], [task availableDateNumber], @(task.maxRetries), @(!self.prohibitsBackoff && task.retryWithBackoff)];
         [self checkErrorForDatabase:db stepDescription:@"inserting task into task queue"];
     }];
