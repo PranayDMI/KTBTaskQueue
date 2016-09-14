@@ -69,18 +69,20 @@ extern const NSInteger KTBTaskAlwaysRetry;
 /**
  Simple constructor to return a task. The task will be available immediately, will abandon after 10 retries, and will use backoff.
  @param name The name of the task.
+ @param requestURL Task Request URL.
  @param userInfo Arbitrary JSON-encodable data for this task.
  */
-+ (instancetype)taskWithName:(NSString *)name userInfo:(NSDictionary *)userInfo;
++ (instancetype)taskWithName:(NSString *)name taskURL:(NSString *)requestURL userInfo:(NSDictionary *)userInfo;
 /**
  Full constructor. Passing in @c nil for @c userInfo and @c availableDate will treat them as the default: an empty dictionary and now, respectively.
  @param name The name of the task.
+ @param requestURL Task Request URL.
  @param userInfo Arbitrary JSON-encodable data for this task.
  @param availableDate Date this task should be available for execution. Passing @c nil will make the task available immediately.
  @param maxRetries Number of times to retry this task. Passing in @c KTBTaskAlwaysRetry will prevent this task from abandoning due to high retry count.
  @param useBackoff Whether to retry the task with exponential backoff delay or immediately.
  */
-+ (instancetype)taskWithName:(NSString *)name userInfo:(NSDictionary *)userInfo availableDate:(NSDate *)availableDate maxRetries:(NSInteger)maxRetries useBackoff:(BOOL)useBackoff;
++ (instancetype)taskWithName:(NSString *)name taskURL:(NSString *)requestURL userInfo:(NSDictionary *)userInfo availableDate:(NSDate *)availableDate maxRetries:(NSUInteger)maxRetries useBackoff:(BOOL)useBackoff;
 /**
  Changes the default value of @c retryWithBackoff on newly-created tasks. The default is @c YES.
  */

@@ -27,19 +27,19 @@ static BOOL KTBTaskRetryWithBackoffDefault = YES;
 
 @implementation KTBTask
 
-+ (instancetype)taskWithName:(NSString *)name userInfo:(NSDictionary *)userInfo {
-    return [self taskWithName:name userInfo:userInfo availableDate:[NSDate date] maxRetries:KTBTaskMaxRetriesDefault useBackoff:KTBTaskRetryWithBackoffDefault];
++ (instancetype)taskWithName:(NSString *)name taskURL:(NSString *)requestURL userInfo:(NSDictionary *)userInfo {
+  return [self taskWithName:name taskURL:requestURL userInfo:userInfo availableDate:[NSDate date] maxRetries:KTBTaskMaxRetriesDefault useBackoff:KTBTaskRetryWithBackoffDefault];
 }
 
-+ (instancetype)taskWithName:(NSString *)name userInfo:(NSDictionary *)userInfo availableDate:(NSDate *)availableDate maxRetries:(NSInteger)maxRetries useBackoff:(BOOL)useBackoff {
-    KTBTask *task = [KTBTask new];
-    task.name = name;
-    task.userInfo = userInfo ?: @{};
-    task.availableDate = availableDate ?: [NSDate date];
-    task.maxRetries = maxRetries;
-    task.retryWithBackoff = useBackoff;
-    task.taskRequestURL = requestURL;
-    return task;
++ (instancetype)taskWithName:(NSString *)name taskURL:(NSString *)requestURL userInfo:(NSDictionary *)userInfo availableDate:(NSDate *)availableDate maxRetries:(NSUInteger)maxRetries useBackoff:(BOOL)useBackoff {
+  KTBTask *task = [KTBTask new];
+  task.name = name;
+  task.userInfo = userInfo ?: @{};
+  task.availableDate = availableDate ?: [NSDate date];
+  task.maxRetries = maxRetries;
+  task.retryWithBackoff = useBackoff;
+  task.taskRequestURL = requestURL;
+  return task;
 }
 
 + (instancetype)taskWithResultSet:(FMResultSet *)resultSet {
